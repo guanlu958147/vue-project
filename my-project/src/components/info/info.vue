@@ -39,7 +39,7 @@
                                 <i class="el-icon-menu"></i>
                                 <span slot="title">新增影院</span>
                             </el-menu-item>
-                            <el-menu-item index="3-2" route="/info/studio">
+                            <el-menu-item index="3-2" route="/info/studioList">
                                 <i class="el-icon-menu"></i>
                                 <span slot="title">影院列表</span>
                             </el-menu-item>
@@ -54,12 +54,12 @@
                             <span slot="title">放映厅列表</span>
                         </el-menu-item>
                     </el-submenu>
-                    <el-submenu index="4">
+                    <el-submenu index="5">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>排片管理</span>
                         </template>
-                        <el-menu-item index="4-1" route="/info/schedule">
+                        <el-menu-item index="5-1" route="/info/schedule">
                             <i class="el-icon-menu"></i>
                             <span slot="title">排片列表</span>
                         </el-menu-item>
