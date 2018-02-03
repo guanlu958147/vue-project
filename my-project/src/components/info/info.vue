@@ -53,13 +53,17 @@
                             <i class="el-icon-menu"></i>
                             <span slot="title">放映厅列表</span>
                         </el-menu-item>
+                        <el-menu-item index="4-2" route="/info/addTheater">
+                            <i class="el-icon-menu"></i>
+                            <span slot="title">增加放映厅</span>
+                        </el-menu-item>
                     </el-submenu>
-                    <el-submenu index="4">
+                    <el-submenu index="5">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>排片管理</span>
                         </template>
-                        <el-menu-item index="4-1" route="/info/schedule">
+                        <el-menu-item index="5-1" route="/info/schedule">
                             <i class="el-icon-menu"></i>
                             <span slot="title">排片列表</span>
                         </el-menu-item>
@@ -83,16 +87,11 @@ export default {
   },
    methods:{
        handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-        
-        
-      
+        console.log(key, keyPath); 
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
-      },
-      
-      
+      }  
   }
 }
 </script>
