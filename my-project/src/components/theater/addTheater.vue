@@ -20,11 +20,11 @@ export default {
   name: "addTheater",
   data() {
     return {
-      labelPosition: "right",
+      labelPosition: "center",
       name:"万达1",
       rowNo:5,
       colNo:6,
-      studioId:"5a755d3053540218f44331b0"
+      studioId:"5a755d3053540218f44331b9"
     };
   },
   methods:{

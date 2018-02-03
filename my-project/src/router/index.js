@@ -6,6 +6,7 @@ import Info from "../components/info/info.vue"
 import User from "../components/user/user.vue"
 import Movie from "../components/movie/movie.vue"
 import Studio from "../components/studio/studio.vue"
+import StudioList from "../components/studio/studioList.vue"
 import Theater from "../components/theater/theater.vue"
 import AddTheater from "../components/theater/addTheater.vue"
 import Schedule from "../components/schedule/schedule.vue"
@@ -16,6 +17,7 @@ Vue.component("Info",Info)
 Vue.component("User",User)
 Vue.component("Movie",Movie)
 Vue.component("Studio",Studio)
+Vue.component("StudioList",StudioList)
 Vue.component("Theater",Theater)
 Vue.component("AddTheater",AddTheater)
 Vue.component("Schedule",Schedule)
@@ -42,6 +44,9 @@ export default new Router({
       },{
         path:'studio',
         component:Studio
+      },{
+        path:'studioList',
+        component:StudioList
       },{
         path:'movie',
         component:Movie

@@ -39,7 +39,7 @@
                                 <i class="el-icon-menu"></i>
                                 <span slot="title">新增影院</span>
                             </el-menu-item>
-                            <el-menu-item index="3-2" route="/info/studio">
+                            <el-menu-item index="3-2" route="/info/studioList">
                                 <i class="el-icon-menu"></i>
                                 <span slot="title">影院列表</span>
                             </el-menu-item>
