@@ -140,7 +140,7 @@ export default {
     },
     async getCreat() {
       const { username, pass } = this.$data.ruleForm2;
-      const data = await fetch("/studios/*users/createUser", {
+      const data = await fetch("/api/users/createUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
