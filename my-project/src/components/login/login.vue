@@ -92,13 +92,13 @@ export default {
       });
     },
 
-   async login() {
+    async login() {
       const { username, password } = this;
       const arr = await this.getCreat();
       if (arr.length === 1) {
         this.$router.push({
           path: "/info/user"
-        })
+        });
       } else {
         console.log("hello");
       }
