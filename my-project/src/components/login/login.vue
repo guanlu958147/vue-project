@@ -105,7 +105,7 @@ export default {
     },
     async getCreat() {
       const { username, password } = this;
-      const data = await fetch("/api/users/login", {
+      const data = await fetch("/studios/*/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
