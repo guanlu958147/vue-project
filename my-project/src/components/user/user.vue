@@ -46,6 +46,7 @@
                     <el-button
                         size="mini"
                         type="danger"
+                        icon="el-icon-delete"
                         @click="handleDelete(scope.$index, scope.row)">删除
                     </el-button>
                 </template>
@@ -79,15 +80,19 @@
         },
         watch: {
             curPage(value) {
-                this.getUsersByPageAsync();
+                this.$store.dispatch({
+                type: "userStore/getUsersByPageAsync"
+                })
             },
             eachPage(value) {
-                this.getUsersByPageAsync();
+                this.$store.dispatch({
+                type: "userStore/getUsersByPageAsync"
+                })
             }
         },
         created() {
             this.$store.dispatch({
-            type: "userStore/getUsersByPageAsync"
+                type: "userStore/getUsersByPageAsync"
             })
         },
         data() {
@@ -102,6 +107,12 @@
             }
         },
         methods: {
+            ...mapActions("userStore", [
+                "getUsersByPageAsync",
+                "updateUserAsync",
+                "deleteUserAsync"
+            ]),
+            ...mapMutations("userStore",["setCurPage","setEachPage"]),
             indexMethod(index) {
                 return index + 1;
              },
@@ -110,7 +121,6 @@
                     type:"userStore/getUsersByPageAsync"
                 });
             },1000),
-            ...mapMutations("userStore",["setCurPage","setEachPage"]),
             handleEdit(index, row) {
                 this.dialogFormVisible = true
                 this.form._id = row._id;
@@ -124,14 +134,18 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.DeleteUser();
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功!'
+                    this.$store.dispatch({
+                        type:"userStore/deleteUserAsync",
+                        _id: this.form._id,
+                        index
                     });
                     this.$store.dispatch({
                         type:"userStore/getUsersByPageAsync"
-                    });
+                     });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    }); 
                 }).catch(() => {
                 this.$message({
                     type: 'info',
@@ -139,21 +153,6 @@
                 });          
                 });
             },
-            async DeleteUser(){
-                    const data = await fetch(
-                        "/api/users/delet",
-                        {
-                            method: "POST",
-                            headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                            },
-                            body: "_id=" + this.form._id,
-                            credentials: "include"
-                        }
-                    ).then(function(response){
-                        return response.json();
-                    })
-                },
             cancelUpdate(){
                 console.log("cancelUpdate")
                 this.dialogFormVisible = false
@@ -161,26 +160,13 @@
             confirmUpdate(){
                 this.dialogFormVisible = false;
                 console.log("confirmUpdate");
-                this.UpdateUser();
                 this.$store.dispatch({
-                    type:"userStore/getUsersByPageAsync"
+                    type:"userStore/updateUserAsync",
+                    _id: this.form._id,
+                    username: this.form.username,
+                    password: this.form.password
                 });
             },
-            async UpdateUser(){
-                    const data = await fetch(
-                        "/api/users/update",
-                        {
-                            method: "POST",
-                            headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                            },
-                            body: "_id=" + this.form._id + "&username=" + this.form.username + "&password=" + this.form.password,
-                            credentials: "include"
-                        }
-                    ).then(function(response){
-                        return response.json();
-                    })
-                },
             handleSizeChange(val) {
                 this.setEachPage({
                     eachPage: val
