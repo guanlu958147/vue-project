@@ -23,11 +23,11 @@
                             <i class="el-icon-location"></i>
                             <span>电影管理</span>
                         </template>
-                        <el-menu-item index="2-1" route="/info/movie">
+                        <el-menu-item index="2-1" route="/info/addMovie">
                             <i class="el-icon-menu"></i>
                             <span slot="title">新增电影</span>
                         </el-menu-item>
-                        <el-menu-item index="2-2" route="/info/movie">
+                        <el-menu-item index="2-2" route="/info/movieList">
                             <i class="el-icon-menu"></i>
                             <span slot="title">电影列表</span>
                         </el-menu-item>
