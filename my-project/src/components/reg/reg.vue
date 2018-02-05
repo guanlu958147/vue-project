@@ -150,7 +150,7 @@ export default {
       }).then(function(response) {
         return response;
       });
-    }
-  }
+    },
+  },
 };
 </script>

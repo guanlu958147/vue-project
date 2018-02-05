@@ -7,7 +7,7 @@
             <h1 class="login_titile">登录</h1>
             </el-form-item>
             <el-form-item label="账户">
-            <el-input class="inout" v-model="username" suffix-icon="el-icon-mobile-phone" ref="username" ></el-input>
+            <el-input class="inout" v-model="username" suffix-icon="el-icon-mobile-phone" ref="username"></el-input>
             </el-form-item>
             <el-form-item  label="密码">
             <el-input type="password" v-model="password" suffix-icon="el-icon-edit" auto-complete="off"></el-input>
@@ -45,6 +45,8 @@
   display: inline-block;
   width: 430px;
   font-size: 16px;
+  display: flex;
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
   border-color: aqua;
   border-radius: 20px;
@@ -52,6 +54,8 @@
 .regbtn {
   display: inline-block;
   margin-top: 15px;
+  display: flex;
+  justify-content: center;
   width: 430px;
   font-size: 16px;
   background-color: rgba(0, 0, 0, 0.4);
@@ -94,13 +98,17 @@ export default {
 
     async login() {
       const { username, password } = this;
-      const arr = await this.getCreat();
-      if (arr.length === 1) {
-        this.$router.push({
-          path: "/info/user"
-        });
+      if (username == "" || password == "") {
+        alert("用户名或者密码不能为空");
       } else {
-        console.log("hello");
+        const arr = await this.getCreat();
+        if (arr.length === 1) {
+          this.$router.push({
+            path: "/info/user"
+          });
+        } else {
+          console.log("hello");
+        }
       }
     },
     async getCreat() {
@@ -113,7 +121,7 @@ export default {
         body: "username=" + username + "&password=" + password,
         credentials: "include"
       }).then(function(response) {
-        return response.json();
+        return response;
       });
       return data;
     }
