@@ -26,17 +26,24 @@ Vue.component("Theater",Theater)
 Vue.component("AddTheater",AddTheater)
 Vue.component("Schedule",Schedule)
 
-Vue.use(Router)
+
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Login',
+      path: "/",
+      name: "Login",
       component: Login
-    },{
-      path: '/reg',
-      name: 'Reg',
+    },
+    {
+      path: "/login/:username",
+      name: "Login",
+      component: Login
+    },
+    {
+      path: "/reg",
+      name: "Reg",
       component: Reg
     },{
       path: '/info',
@@ -72,4 +79,4 @@ export default new Router({
       }]
     }
   ]
-})
+});
