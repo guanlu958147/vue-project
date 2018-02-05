@@ -12,7 +12,7 @@
             <el-form-item  label="密码">
             <el-input type="password" v-model="password" suffix-icon="el-icon-edit" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item class="button">
+            <el-form-item class="button" id="lhello">
             <el-button class="loginbtn" @click="login" type="primary">登录</el-button>
             <el-button class="regbtn" @click="reg" type="primary">注册</el-button>
             </el-form-item>
@@ -21,6 +21,7 @@
         <el-col :span="8"><div style="height: 1px;"></div></el-col>
     </el-row>
 </template>
+
 
 <style>
 .login-conter {
@@ -31,8 +32,10 @@
     center;
 }
 .login_titile {
+  display: flex;
+  justify-content: center;
   font-size: 60px;
-  text-align: center;
+  height: 80px;
   color: rgba(255, 255, 255, 0.6);
 }
 .button {
@@ -42,17 +45,19 @@
   align-items: center;
 }
 .loginbtn {
-  display: inline-block;
-  width: 430px;
   font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
   border-color: aqua;
   border-radius: 20px;
 }
 .regbtn {
-  display: inline-block;
   margin-top: 15px;
-  width: 430px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   font-size: 16px;
   background-color: rgba(0, 0, 0, 0.4);
   border-color: aqua;
@@ -71,6 +76,9 @@
 }
 .el-button + .el-button {
   margin-left: 0;
+}
+#lhello > div {
+  width: 85%;
 }
 </style>
 <script>
@@ -94,13 +102,17 @@ export default {
 
     async login() {
       const { username, password } = this;
-      const arr = await this.getCreat();
-      if (arr.length === 1) {
-        this.$router.push({
-          path: "/info/user"
-        });
+      if (username == "" || password == "") {
+        alert("用户名或者密码不能为空");
       } else {
-        console.log("hello");
+        const arr = await this.getCreat();
+        if (arr.length === 1) {
+          this.$router.push({
+            path: "/info/user"
+          });
+        } else {
+          alert("用户名或者密码错误")
+        }
       }
     },
     async getCreat() {
