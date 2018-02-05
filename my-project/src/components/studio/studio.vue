@@ -7,49 +7,41 @@
             <el-input v-model="studio.address" style="width:300px"></el-input>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="save">保存</el-button>
-            <el-button @click="reset">重置</el-button>
-            <el-button v-if="this.studio.name || this.studio.address" @click="toTheater">添加放映厅</el-button>
-            <el-button v-else disabled>添加放映厅</el-button>
+            <el-button type="primary" @click="save" icon="el-icon-success">保存</el-button>
+            <el-button type="danger" @click="reset" icon="el-icon-error">重置</el-button>
         </el-form-item>
     </el-form>
 </template>
 <script>
-    import{mapActions} from "vuex";
-    export default {
-        name: "studio",
-        data() {
-            return {
-                studio: {
-                    name: "万达影城",
-                    address: "文化宫",
-                }
-            };
-        },
-        methods: {
-            ...mapActions("studioStore",["addStudio"]),
-            save(){
-                this.$store.dispatch({
-                    type:"studioStore/addStudio",
-                    name:this.studio.name,
-                    address:this.studio.address
-                })
-                this.$notify({
-                    title: '成功',
-                    message: '添加影院成功',
-                    type: 'success'
-                });
-                this.studio.name="";
-                this.studio.address="";
-                // const { _id } = await this.studio.addStudio();
-            },
-            reset() {
-                this.studio.name = "";
-                this.studio.address = "";
-            },
-            toTheater() {
-                this.$router.push({path:`/info/addTheater${studioId}=${_id}`})
-            }
-        }
+import { mapActions } from "vuex";
+export default {
+  name: "studio",
+  data() {
+    return {
+      studio: {
+        name: "万达影城",
+        address: "文化宫"
+      }
     };
+  },
+  methods: {
+    ...mapActions("studioStore", ["addStudio"]),
+    save() {
+      this.$store.dispatch({
+        type: "studioStore/addStudio",
+        name: this.studio.name,
+        address: this.studio.address
+      });
+      this.$message({
+        type: "success",
+        showClose: true,
+        message: "添加成功!"
+      });
+    },
+    reset() {
+      this.studio.name = "";
+      this.studio.address = "";
+    }
+  }
+};
 </script>
