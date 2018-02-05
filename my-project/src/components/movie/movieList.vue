@@ -80,7 +80,7 @@
                     <el-form-item>
                         <el-button type="primary" @click="creUpdata(scope.$index,scope.row)"  plain>保存</el-button>
                         <el-button type="primary" @click="resetBtn(scope.$index,scope.row)" plain>重置</el-button>
-                     </el-form-item>
+                    </el-form-item>
                 </el-form>
             </el-popover>
                 <el-button type="primary" @click="updateBtn(scope.$index,scope.row)" v-popover:update plain>更新</el-button>
@@ -131,13 +131,14 @@ import { mapState,mapMutations,mapActions } from "vuex"
             }
         },
       created(){
-          console.log(this.rows)
+        //   console.log(this.rows)
           this.$store.dispatch({
               type:"movieStore/getMoviesByPageAsync"
           })
       },
       methods:{
            ...mapMutations("movieStore",["setCurPage","setEachPage"]),
+           ...mapActions("movieStore",["deleMoviesAsync","getMoviesByPageAsync","updateMoviesAsync"]),
            handleSizeChange(val) {
                 this.setEachPage({
                     eachPage:val
@@ -150,6 +151,21 @@ import { mapState,mapMutations,mapActions } from "vuex"
             },
             dele(index,{_id}){
                 console.log(index)
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+                }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                    });          
+                });
                 this.$store.dispatch({
                     type:"movieStore/deleMoviesAsync",
                     _id,
@@ -158,6 +174,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
             },
             //更新按钮
             updateBtn(index,row){
+                
                 this.cName = row.cName
                 this.eName= row.eName,
                 this.type= row.type,
@@ -167,17 +184,21 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 this.synopsis = row.synopsis
             },
             //更新里的保存按钮
-            creUpdata(index,{_id}){
-                // console.log(this.$refs.cName.value)
-                this.$store.dispatch({
-                type:"movieStore/updateMoviesAsync",
-                cName:this.$refs.cName.value,
-                eName:this.$refs.eName.value,
-                type:this.$refs.type.value,
-                duration:this.$refs.duration.value,
-                release:this.$refs.release.value,
-                synopsis:this.$refs.synopsis.value,
-            })
+            creUpdata(index,{_id,cName,eName,type,duration,release,synopsis}){
+                // console.log(row)
+                this.$store.dispatch(
+               "movieStore/updateMoviesAsync",
+                {
+                    _id:_id,
+                    cName:this.$refs.cName.value,
+                    eName:this.$refs.eName.value,
+                    type:this.$refs.type.value,
+                    duration:this.$refs.duration.value,
+                    release:this.$refs.release.value,
+                    synopsis:this.$refs.synopsis.value,
+                    country:this.$refs.country.value
+                }
+            )
         },
         //更新里的重置按钮
         resetBtn(row){
