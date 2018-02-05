@@ -1,9 +1,11 @@
 
 <template>
     <el-container>
-        <el-header style="background:#f2f2f2">猫眼电影</el-header>
+        <el-header style="background:rgb(67,74,80);color:white;line-height:60px">
+            猫眼电影
+        </el-header>
         <el-container >
-            <el-aside width="200px" mode="horizontal" >
+            <el-aside width="200px" mode="horizontal" style="background:#545c64;height:900px" >
                 <el-menu
                     :default-active="activeIndex"
                     :router="isRouter"
@@ -21,11 +23,11 @@
                             <i class="el-icon-location"></i>
                             <span>电影管理</span>
                         </template>
-                        <el-menu-item index="2-1" route="/info/movie">
+                        <el-menu-item index="2-1" route="/info/addMovie">
                             <i class="el-icon-menu"></i>
                             <span slot="title">新增电影</span>
                         </el-menu-item>
-                        <el-menu-item index="2-2" route="/info/movie">
+                        <el-menu-item index="2-2" route="/info/movieList">
                             <i class="el-icon-menu"></i>
                             <span slot="title">电影列表</span>
                         </el-menu-item>
@@ -78,20 +80,38 @@
 </template>
 <script>
 export default {
-  name:"info",
-  data(){
-      return{
-          isRouter:true,
-          activeIndex:"1"
-      }
+  name: "info",
+  data() {
+    return {
+      isRouter: true,
+      activeIndex: "1"
+    };
   },
-   methods:{
-       handleOpen(key, keyPath) {
-        console.log(key, keyPath); 
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }  
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    }
   }
-}
+};
 </script>
+<style>
+    body {
+        margin: 0;
+    }
+    .el-submenu{
+        width: 200px;
+    }
+    .el-menu-item{
+        width: 200px;
+        border-bottom: rgba(0, 0, 0, 0.05) solid;
+    }
+    .el-main{
+        background: #E9EEF3;
+    }
+    .el-submenu__title{
+        border-bottom: rgba(0, 0, 0, 0.2) solid;
+    }
+</style>
