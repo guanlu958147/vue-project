@@ -1,4 +1,3 @@
-
 <template>
   <el-row class="reg-conter">
     <el-col :span="8"><div style="height: 1px;"></div></el-col>
@@ -9,7 +8,7 @@
           <h1 class="regtitle">注册页面</h1>
         </el-form-item>
     <el-form-item label="用户名" prop="username">
-        <el-input  v-model.number="ruleForm2.username"></el-input>
+        <el-input  v-model.number="ruleForm2.username" ref="user" @blur="getuser"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
         <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
@@ -17,7 +16,7 @@
       <el-form-item label="确认密码" prop="checkPass">
         <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item class="commit">
         <el-button type="primary" class="agree" @click="submitForm('ruleForm2')">提交</el-button>
         <el-button  class="reset" @click="resetForm('ruleForm2')">重置</el-button>
       </el-form-item>
@@ -53,18 +52,19 @@
   border-color: aqua;
 }
 .agree {
-  display: inline-block;
-  margin-top: 15px;
-  width: 410px;
   font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
   border-color: aqua;
   border-radius: 20px;
 }
 .reset {
-  display: inline-block;
   margin-top: 15px;
-  width: 410px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   font-size: 16px;
   background-color: rgba(0, 0, 0, 0.4);
   border-color: aqua;
@@ -81,13 +81,6 @@
 export default {
   name: "reg",
   data() {
-    var checkUsername = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("用户名不能为空"));
-      } else {
-        callback();
-      }
-    };
     var validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
@@ -110,13 +103,11 @@ export default {
     return {
       ruleForm2: {
         pass: "",
-        checkPass: "",
-        username: ""
+        checkPass: ""
       },
       rules2: {
         pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
-        username: [{ validator: checkUsername, trigger: "blur" }]
+        checkPass: [{ validator: validatePass2, trigger: "blur" }]
       }
     };
   },
@@ -130,10 +121,17 @@ export default {
             path: `/login/${username}`
           });
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
+    },
+    async getuser() {
+      const getarr = await this.checkuser();
+      if (getarr.length >= 1) {
+        alert("用户名已存在");
+      } else {
+        this.$data.ruleForm2.username = this.$refs.user.value;
+      }
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
@@ -148,9 +146,22 @@ export default {
         body: "username=" + username + "&password=" + pass,
         credentials: "include"
       }).then(function(response) {
-        return response;
+        return response.json();
       });
     },
-  },
+    async checkuser() {
+      const { username } = this.$data.ruleForm2;
+      return await fetch("/api/users/find", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "username=" + username,
+        credentials: "include"
+      }).then(function(response) {
+        return response.json();
+      });
+    }
+  }
 };
 </script>

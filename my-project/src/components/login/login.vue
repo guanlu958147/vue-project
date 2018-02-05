@@ -7,12 +7,12 @@
             <h1 class="login_titile">登录</h1>
             </el-form-item>
             <el-form-item label="账户">
-            <el-input class="inout" v-model="username" suffix-icon="el-icon-mobile-phone" ref="username"></el-input>
+            <el-input class="inout" v-model="username" suffix-icon="el-icon-mobile-phone" ref="username" ></el-input>
             </el-form-item>
             <el-form-item  label="密码">
             <el-input type="password" v-model="password" suffix-icon="el-icon-edit" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item class="button">
+            <el-form-item class="button" id="lhello">
             <el-button class="loginbtn" @click="login" type="primary">登录</el-button>
             <el-button class="regbtn" @click="reg" type="primary">注册</el-button>
             </el-form-item>
@@ -21,6 +21,7 @@
         <el-col :span="8"><div style="height: 1px;"></div></el-col>
     </el-row>
 </template>
+
 
 <style>
 .login-conter {
@@ -31,8 +32,10 @@
     center;
 }
 .login_titile {
+  display: flex;
+  justify-content: center;
   font-size: 60px;
-  text-align: center;
+  height: 80px;
   color: rgba(255, 255, 255, 0.6);
 }
 .button {
@@ -42,9 +45,8 @@
   align-items: center;
 }
 .loginbtn {
-  display: inline-block;
-  width: 430px;
   font-size: 16px;
+  width: 100%;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
@@ -52,11 +54,10 @@
   border-radius: 20px;
 }
 .regbtn {
-  display: inline-block;
   margin-top: 15px;
   display: flex;
   justify-content: center;
-  width: 430px;
+  width: 100%;
   font-size: 16px;
   background-color: rgba(0, 0, 0, 0.4);
   border-color: aqua;
@@ -75,6 +76,9 @@
 }
 .el-button + .el-button {
   margin-left: 0;
+}
+#lhello > div {
+  width: 85%;
 }
 </style>
 <script>
@@ -107,7 +111,7 @@ export default {
             path: "/info/user"
           });
         } else {
-          console.log("hello");
+          alert("用户名或者密码错误")
         }
       }
     },
@@ -121,7 +125,7 @@ export default {
         body: "username=" + username + "&password=" + password,
         credentials: "include"
       }).then(function(response) {
-        return response;
+        return response.json();
       });
       return data;
     }
