@@ -55,6 +55,9 @@ export default {
         "本片讲述的是受到超人（亨利·卡维尔 饰）无私奉献的影响，蝙蝠侠（本·阿弗莱克 饰）重燃了对人类的信心，接受了新盟友神奇女侠（盖尔·加朵 饰）的帮助，去对抗更加强大的敌人。蝙蝠侠和神奇女侠一同寻找并招募了一支超人类联盟来抵挡新觉醒的威胁。但尽管这支队伍集结了超人、蝙蝠侠、神奇女侠、闪电侠（埃兹拉·米勒 饰）、海王（杰森·莫玛 饰）和钢骨（雷·费舍 饰）等人，他们似乎无法阻止敌人对地球的进攻……"
     };
   },
+  computed:{
+      ...mapState("movieStore",["_id"])
+  },
   methods: {
     ...mapActions("movieStore", ["createMoviesAsync","getMoviesByPageAsync"]),
     create() {
@@ -81,10 +84,10 @@ export default {
     },
     handelUpload() {
       this.$router.push({
-      path:"/info/addImg",
-      //    params:{
+      path:`/info/addImg/${this._id}`,
+         params:{
 
-      //    }
+         }
       })
     }
   }

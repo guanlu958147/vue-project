@@ -65,7 +65,7 @@ export default new Router({
         path:'studioList',
         component:StudioList
       },{
-        path:'addImg',
+        path:'addImg/:_id',
         component:AddImg
       },{
         path:'theater',
