@@ -78,13 +78,13 @@
                         <el-input v-model="synopsis" ref="synopsis"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="creUpdata(scope.$index,scope.row)"  plain>保存</el-button>
-                        <el-button type="primary" @click="resetBtn(scope.$index,scope.row)" plain>重置</el-button>
+                        <el-button type="primary" @click="creUpdata(scope.$index,scope.row)"  plain icon="el-icon-success">保存</el-button>
+                        <el-button type="danger" @click="resetBtn(scope.$index,scope.row)" plain icon="el-icon-error">重置</el-button>
                     </el-form-item>
                 </el-form>
             </el-popover>
-                <el-button type="primary" @click="updateBtn(scope.$index,scope.row)" v-popover:update plain>更新</el-button>
-                <el-button type="danger" plain  @click="dele(scope.$index,scope.row)">删除</el-button>
+                <el-button type="primary" @click="updateBtn(scope.$index,scope.row)" v-popover:update plain icon="el-icon-edit">更新</el-button>
+                <el-button type="danger" plain  @click="dele(scope.$index,scope.row)" icon="el-icon-delete">删除</el-button>
             </template>
             </el-table-column>
         </el-table>

@@ -29,9 +29,9 @@
         </el-form-item>
         <el-form-item>
             <template slot-scope="scope">
-                <el-button type="primary"  @click="create"  plain>保存</el-button>
-                <el-button type="primary" @click="resetBtn" plain>重置</el-button>
-                <el-button  type="primary" :disabled="isDisabled" @click="handelUpload" plain>上传</el-button>
+                <el-button type="primary"  @click="create"  plain icon="el-icon-success">保存</el-button>
+                <el-button type="danger" @click="resetBtn" plain icon="el-icon-error">重置</el-button>
+                <el-button  :disabled="isDisabled" @click="handelUpload" plain>上传</el-button>
             </template>
         </el-form-item>
     </el-form>
