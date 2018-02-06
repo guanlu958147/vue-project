@@ -1,5 +1,7 @@
 <template>
-    <el-form ref="form" :model="studio" label-width="100px">
+    <div>
+      <h2>新增影院</h2>
+      <el-form ref="form" :model="studio" label-width="100px">
         <el-form-item label="影院名称：">
             <el-input v-model="studio.name" style="width:300px"></el-input>
         </el-form-item>
@@ -10,7 +12,8 @@
             <el-button type="primary" @click="save" icon="el-icon-success">保存</el-button>
             <el-button type="danger" @click="reset" icon="el-icon-error">重置</el-button>
         </el-form-item>
-    </el-form>
+      </el-form>
+    </div>
 </template>
 <script>
 import { mapActions } from "vuex";

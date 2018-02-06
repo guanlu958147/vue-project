@@ -1,5 +1,7 @@
 <template>
-    <el-form style="width:400px" :label-position="labelPosition" label-width="100px">
+    <div>
+      <h2>增加放映厅</h2>
+      <el-form style="width:400px" :label-position="labelPosition" label-width="100px">
         <el-form-item label="放映厅名称">
             <el-input v-model="name" ref="name"></el-input>
         </el-form-item>
@@ -13,7 +15,8 @@
             <el-button type="primary" @click="submitForm" icon="el-icon-success">保存</el-button>
             <el-button type="danger" @click="resetForm" icon="el-icon-error">重置</el-button>
         </el-form-item>
-    </el-form>
+      </el-form>
+    </div>
 </template>
 <script>
 export default {

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>影院列表</h2>
         <el-table
         :data="rows"
         border

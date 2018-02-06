@@ -51,13 +51,13 @@
                             <i class="el-icon-location"></i>
                             <span>放映厅管理</span>
                         </template>
-                        <el-menu-item index="4-1" route="/info/theater">
+                        <el-menu-item index="4-1" route="/info/addTheater">
+                            <i class="el-icon-menu"></i>
+                            <span slot="title">新增放映厅</span>
+                        </el-menu-item>
+                        <el-menu-item index="4-2" route="/info/theater">
                             <i class="el-icon-menu"></i>
                             <span slot="title">放映厅列表</span>
-                        </el-menu-item>
-                        <el-menu-item index="4-2" route="/info/addTheater">
-                            <i class="el-icon-menu"></i>
-                            <span slot="title">增加放映厅</span>
                         </el-menu-item>
                     </el-submenu>
                     <el-submenu index="5">

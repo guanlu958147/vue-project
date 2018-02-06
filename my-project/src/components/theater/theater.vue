@@ -1,9 +1,10 @@
 <template>
   <div>
+      <h2>放映厅列表</h2>
       <el-table
         :data="rows"
         stripe
-        style="width: 100%">
+        style="width: 50%">
         <el-table-column
         prop="name"
         label="放映厅名称"
@@ -56,7 +57,8 @@
       :page-sizes="[10, 20, 30, 40]"
       :page-size="eachPage"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="total">
+      :total="total"
+      style="margin-top:20px">
     </el-pagination>
   </div>
 </template>
