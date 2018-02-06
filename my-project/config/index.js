@@ -16,7 +16,6 @@ module.exports = {
         changeOrigin: true
       }
     },
-
     assetsSubDirectory: "static",
     assetsPublicPath: "/",
     proxyTable: {

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>电影列表</h2>
         <el-table
             :data="rows"
             stripe
@@ -78,13 +79,13 @@
                         <el-input v-model="synopsis" ref="synopsis"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="creUpdata(scope.$index,scope.row)"  plain>保存</el-button>
-                        <el-button type="primary" @click="resetBtn(scope.$index,scope.row)" plain>重置</el-button>
+                        <el-button type="primary" @click="creUpdata(scope.$index,scope.row)"  plain icon="el-icon-success">保存</el-button>
+                        <el-button type="danger" @click="resetBtn(scope.$index,scope.row)" plain icon="el-icon-error">重置</el-button>
                     </el-form-item>
                 </el-form>
             </el-popover>
-                <el-button type="primary" @click="updateBtn(scope.$index,scope.row)" v-popover:update plain>更新</el-button>
-                <el-button type="danger" plain  @click="dele(scope.$index,scope.row)">删除</el-button>
+                <el-button type="primary" @click="updateBtn(scope.$index,scope.row)" v-popover:update plain icon="el-icon-edit">更新</el-button>
+                <el-button type="danger" plain  @click="dele(scope.$index,scope.row)" icon="el-icon-delete">删除</el-button>
             </template>
             </el-table-column>
         </el-table>
@@ -131,7 +132,6 @@ import { mapState,mapMutations,mapActions } from "vuex"
             }
         },
       created(){
-        //   console.log(this.rows)
           this.$store.dispatch({
               type:"movieStore/getMoviesByPageAsync"
           })
@@ -139,6 +139,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
       methods:{
            ...mapMutations("movieStore",["setCurPage","setEachPage"]),
            ...mapActions("movieStore",["deleMoviesAsync","getMoviesByPageAsync","updateMoviesAsync"]),
+           //分页
            handleSizeChange(val) {
                 this.setEachPage({
                     eachPage:val
@@ -149,6 +150,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
                     curPage:val
                 })
             },
+            //删除电影
             dele(index,{_id}){
                 console.log(index)
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -156,6 +158,11 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 cancelButtonText: '取消',
                 type: 'warning'
                 }).then(() => {
+                    this.$store.dispatch({
+                    type:"movieStore/deleMoviesAsync",
+                    _id,
+                    index
+                })
                 this.$message({
                     type: 'success',
                     message: '删除成功!'
@@ -166,15 +173,10 @@ import { mapState,mapMutations,mapActions } from "vuex"
                     message: '已取消删除'
                     });          
                 });
-                this.$store.dispatch({
-                    type:"movieStore/deleMoviesAsync",
-                    _id,
-                    index
-                })
+                
             },
             //更新按钮
             updateBtn(index,row){
-                
                 this.cName = row.cName
                 this.eName= row.eName,
                 this.type= row.type,

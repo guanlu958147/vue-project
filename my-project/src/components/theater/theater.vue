@@ -4,7 +4,7 @@
       <el-table
         :data="rows"
         stripe
-        style="width: 50%">
+        style="width: 100%">
         <el-table-column
         prop="name"
         label="放映厅名称"

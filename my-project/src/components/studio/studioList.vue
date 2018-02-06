@@ -4,7 +4,7 @@
         <el-table
         :data="rows"
         border
-        style="width: 60%">
+        style="width: 100%">
             <el-table-column
                 prop="name"
                 label="影院名称"

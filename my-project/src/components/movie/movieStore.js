@@ -4,7 +4,8 @@ const movieStore = {
         curPage: 1,
         eachPage: 10,
         total: 0,
-        rows:[]
+        rows:[],
+        _id:""
     },
     mutations: {
         getMoviesByPage(state,payload){
@@ -13,9 +14,18 @@ const movieStore = {
         deleMovies(state,{index}){
             state.rows.splice(index,1)
         },
-        // createMovies(state, payload) {
-        //     console.log(payload)
-        // },
+        addMovie(state,{_id}){
+            state._id = _id
+        },
+        getImgs(state,payload){
+        const items = payload.rows.map((item)=>{
+                item.imgId = item._id
+                item.url = "http://localhost:3000"+ item.url.slice(1)
+                return item
+            })
+            state.rows = [...items]
+            state.total = payload.total
+        },
         updateMovies(state,{ _id,cName, eName, type, country, duration, release, synopsis }){
             state.rows.map((item)=>{
                 if( _id == item._id ){
@@ -59,9 +69,9 @@ const movieStore = {
                     return response.json();
                 })
                 if(data){
-                    console.log(data)
                     console.log("保存成功")
                 }
+                meType.commit("addMovie",data)
         },
         //获取电影分页
         async getMoviesByPageAsync(context){
@@ -86,7 +96,7 @@ const movieStore = {
            //删除电影
            async deleMoviesAsync(type,payload){
             const { _id,index } = payload
-            const dataDele = await fetch(
+            const data = await fetch(
               "/api/movies/dele?_id="+_id,
               {
                    method:"GET",
@@ -115,6 +125,37 @@ const movieStore = {
                if(updateData.nModified==1){
                 movType.commit("updateMovies",{_id,cName,eName,type,country,duration,release,synopsis})
                }
+           },
+           //通过movieId查找图片
+           async getImgsByAsync(context,payload){
+            const { curPage,eachPage } = context.state
+            const { movieId,type } = payload
+            const data = await fetch(
+              "/api/imgs/getImgsByMovieId?page="+curPage+"&rows="+eachPage+"&movieId="+movieId+"&type="+type,
+              {
+                   method:"GET",
+                   headers:{
+                       "Content-Type":"application/x-www-form-urlencoded"
+                   }
+               }).then(function(response){
+                   return response.json();
+               })
+               context.commit("getImgs",data)
+           },
+           //删除图片
+           async delImgsByAsync(context,{_id}){
+            const data = await fetch(
+              "/api/imgs/deleImg?_id="+_id,
+              {
+                   method:"GET",
+                   headers:{
+                       "Content-Type":"application/x-www-form-urlencoded"
+                   }
+               }).then(function(response){
+                   return response.json();
+               })
+               context.commit("getImgs",data)
+               console.log(data)
            },
     }
 }
