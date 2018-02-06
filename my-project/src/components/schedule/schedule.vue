@@ -90,6 +90,7 @@
             <!-- ******************************************* 排片列表*********************************** -->
 
           <el-row>
+              <label><h1>影院</h1></label>
               <el-table
                   :data="theatersList.rows"
                   border
@@ -109,35 +110,39 @@
                          <el-button 
                          size="mini"
                         type="danger"
-                        @clcik="studioClick(scope.$index, scope.row)"
+                        @click="studioClick(scope.$index, scope.row)"
                          >查看放映厅</el-button>
                       </template>
                   </el-table-column>
                 </el-table>
           </el-row>
-          <!-- <el-row>
-            <h1>影厅</h1>
+         <el-row>
+            <label><h1>影厅</h1></label>
             <el-table
-                  :data="tableData"
+                  :data= "theaters.data"
                   border
                   style="width: 100%">
                   <el-table-column
-                    prop="date"
+                    prop="name"
                     label="影厅名称"
                     width="360">
                   </el-table-column>
                   <el-table-column
-                    prop="name"
+                    prop="seats.length"
                     label="总座位数"
-                    width="360">
+                    >
                   </el-table-column>
-                  <el-table-column
-                    prop="address"
-                    label="操作"
-                    width="360">
+                  <el-table-column label="操作">
+                      <template slot-scope="scope">
+                         <el-button 
+                         size="mini"
+                        type="danger"
+                        @click="scheduleClick(scope.$index, scope.row)"
+                         >查看排片</el-button>
+                      </template>
                   </el-table-column>
             </el-table>
-          </el-row>    -->
+          </el-row>   
    </div>
 </template> 
 <script>
@@ -176,7 +181,8 @@ export default {
        "eachPae",
        "total",
        "rows",
-       "theatersList"
+       "theatersList",
+       "studiosList"
      
      ])
   },
@@ -212,12 +218,12 @@ export default {
      //获取movieID
      editMoviesState(value){
           this.movieId = value 
-          console.log(value) 
      },
 
 
      //获取影厅的方法
    handleClick(_id){
+    //  console.log(_id)
       this.$store.dispatch({
         type:"scheduleStore/getTheatersByStudioId",
         studioId:_id
@@ -246,7 +252,6 @@ export default {
 
     //查询按钮
     clickInquireBtn() {
-      console.log(this.movieValue)
        this.$store.dispatch({
          //获取排了片影院的列表      
          type:"scheduleStore/getStudiosByMovieId" ,
@@ -260,12 +265,20 @@ export default {
     },
 
 
-    //查看放映厅
-    //  studioClick() {
-    //    this.$store.dispatch({
-    //       type:"scheduleStore/getStudiosByMovieId"
-    //    })
-    //  }
+   //查看放映厅
+     studioClick(index,{_id}) {
+       this.$store.dispatch({
+          type:"scheduleStore/getTheatersByStudioIdList",
+          studioId:_id
+       })
+     },
+
+
+
+     //查看排片
+     scheduleClick(){
+       console.log(123123)
+     }
   }
 };
 </script>

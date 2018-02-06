@@ -15,10 +15,13 @@ const scheduleStore = {
       rows: []
     },
     theatersList: {
-       rows:[],
-       curPage:1,
-       eachPage:10,
-       total:0
+      rows: [],
+      curPage: 1,
+      eachPage: 10,
+      total: 0
+    },
+    studiosList: {
+      data: []
     }
 
 
@@ -37,6 +40,10 @@ const scheduleStore = {
     //影厅列表
     getSchedule(state, payload) {
       return Object.assign(state.theatersList, payload)
+    },
+    //影厅列表
+    studioList(state, payload) {
+      return Object.assign(state, studiosList, payload)
     }
 
   },
@@ -117,7 +124,7 @@ const scheduleStore = {
     }, {
       movieId,
       studioId,
-      theateriD, 
+      theateriD,
       showId,
       price
     }) {
@@ -127,18 +134,24 @@ const scheduleStore = {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
-          body:"movieId=" + movieId + "&studioId=" +  studioId + "&theateriD=" + theateriD + "&showId=" + showId + "&price=" + price
+          body: "movieId=" + movieId + "&studioId=" + studioId + "&theateriD=" + theateriD + "&showId=" + showId + "&price=" + price
         }
-      )   
+      )
     },
 
 
 
 
     // *****************************************  查询后影院列表,排片信息  ***************************************************
-    async getStudiosByMovieId({ commit },{ movieId, page, rows}) {
+    async getStudiosByMovieId({
+      commit
+    }, {
+      movieId,
+      page,
+      rows
+    }) {
       const data = await fetch(
-        "/api/schedules/getStudiosByMovieId?movieId=" + movieId + "&page=" + page + "&rows=" + rows , {
+        "/api/schedules/getStudiosByMovieId?movieId=" + movieId + "&page=" + page + "&rows=" + rows, {
           method: "GET",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -147,14 +160,34 @@ const scheduleStore = {
       ).then(function (response) {
         return response.json()
       });
-       console.log(data)
-       commit("getSchedule",data)
-    }
+      commit("getSchedule", data)
+    },
 
 
 
     //******************************************  查询放映厅   ************************************************
-    
+    async getTheatersByStudioIdList({
+      commit
+    }, {
+      studioId
+    }) {
+      const data = await fetch(
+        "/api/theaters/getTheatersByStudioId?studioId=" + studioId, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }
+      ).then(function (response) {
+        return response.json()
+
+      });
+
+      console.log(data)
+      commit("getTheaters", {
+        data
+      })
+    }
   }
 }
 export default scheduleStore;
