@@ -111,7 +111,7 @@ export default {
             path: "/info/user"
           });
         } else {
-          alert("用户名或者密码错误")
+          alert("用户名或者密码错误");
         }
       }
     },
