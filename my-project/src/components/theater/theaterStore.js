@@ -41,7 +41,7 @@ const theaterStore = {
           credentials: "include"
         }
       ).then(function (response) {
-        return response.json()
+        return response.json();
       })
       if(data){
         console.log("成功")
