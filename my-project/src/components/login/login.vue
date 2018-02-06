@@ -2,15 +2,15 @@
     <el-row class="login-conter">
         <el-col :span="8"><div style="height: 1px;"></div></el-col>
         <el-col :span="8">
-        <el-form ref="form" label-width="80px">
-            <el-form-item label="">
+        <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+            <el-form-item>
             <h1 class="login_titile">登录</h1>
             </el-form-item>
-            <el-form-item label="账户">
-            <el-input class="inout" v-model="username" suffix-icon="el-icon-mobile-phone" ref="username" ></el-input>
+            <el-form-item label="用户名" prop="username">
+            <el-input class="inout" v-model="ruleForm2.username" suffix-icon="el-icon-mobile-phone" ></el-input>
             </el-form-item>
-            <el-form-item  label="密码">
-            <el-input type="password" v-model="password" suffix-icon="el-icon-edit" auto-complete="off"></el-input>
+            <el-form-item  label="密码" prop="password">
+            <el-input type="password" v-model="ruleForm2.password" suffix-icon="el-icon-edit" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item class="button" id="lhello">
             <el-button class="loginbtn" @click="login" type="primary">登录</el-button>
@@ -86,12 +86,25 @@ export default {
   name: "Login",
   data() {
     return {
-      username: "",
-      password: ""
+      // username:"",
+      ruleForm2: {
+        password: "",
+        username: ""
+      },
+      rules2: {
+        username: [
+          {
+            required: true,
+            message: "用户名不能为空",
+            trigger: "blur"
+          }
+        ],
+        password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
+      }
     };
   },
   created() {
-    this.username = this.$route.params.username;
+    this.ruleForm2.username = this.$route.params.username || "";
   },
   methods: {
     reg() {
@@ -101,9 +114,10 @@ export default {
     },
 
     async login() {
-      const { username, password } = this;
+      const { username, password } = this.ruleForm2;
+      console.log(this.ruleForm2.username, password);
       if (username == "" || password == "") {
-        alert("用户名或者密码不能为空");
+        alert("用户名或密码不能为空");
       } else {
         const arr = await this.getCreat();
         if (arr.length === 1) {
@@ -116,7 +130,7 @@ export default {
       }
     },
     async getCreat() {
-      const { username, password } = this;
+      const { username, password } = this.ruleForm2;
       const data = await fetch("/api/users/login", {
         method: "POST",
         headers: {

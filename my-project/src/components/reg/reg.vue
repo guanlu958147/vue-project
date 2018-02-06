@@ -141,7 +141,7 @@ export default {
         alert("用户名已存在");
         this.isRepeat = true;
       } else {
-        this.$data.ruleForm2.username = this.$refs.user.value;
+        // this.$data.ruleForm2.username = this.$refs.user.value;
         this.isRepeat = false;
       }
     },
