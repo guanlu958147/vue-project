@@ -6,19 +6,9 @@ const path = require("path");
 
 module.exports = {
   dev: {
-    //Paths
-    assetsSubDirectory: "static",
-    assetsPublicPath: "/",
-    proxyTable: {
-      "/studios/*": {
-        target: "http://127.0.0.1:3000",
-        //是否跨域
-        changeOrigin: true
-      }
-    },
-
-    assetsSubDirectory: "static",
-    assetsPublicPath: "/",
+    // Paths
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
     proxyTable: {
       "/api": {
         target: "http://127.0.0.1:3000",
