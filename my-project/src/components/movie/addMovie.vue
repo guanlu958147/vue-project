@@ -1,40 +1,43 @@
 <template>
-   <el-form label-width="80px" size="small" >
-        <el-form-item label="中文名称"  name="cName"  style="width:700px">
-            <el-input  v-model="cName" ref="cName"></el-input>
-        </el-form-item>
-        <el-form-item label="英文名称" name="eName" style="width:700px">
-            <el-input v-model="eName"  ref="eName"></el-input>
-        </el-form-item>
-        <el-form-item label="影片类型"  name="type" style="width:700px">
-            <el-input v-model="type"  ref="type"></el-input>
-        </el-form-item>
-        <el-form-item label="制片国家"  name="country" style="width:700px">
-            <el-input v-model="country"  ref="country"></el-input>
-        </el-form-item>
-        <el-form-item label="片长" name="duration" style="width:700px">
-            <el-input v-model="duration"  ref="duration"></el-input>
-        </el-form-item>
-        <el-form-item label="上映时间" name="release" style="width:700px">
-            <el-input v-model="release" ref="release"></el-input>
-        </el-form-item>
-        <el-form-item label="剧情简介" name="synopsis" style="width:700px">
-            <el-input
-                ref="synopsis"
-                    type="textarea"
-                    :rows="4"
-                    placeholder="请输入内容"
-                    v-model="synopsis">
-            </el-input>
-        </el-form-item>
-        <el-form-item>
-            <template slot-scope="scope">
-                <el-button type="primary"  @click="create"  plain icon="el-icon-success">保存</el-button>
-                <el-button type="danger" @click="resetBtn" plain icon="el-icon-error">重置</el-button>
-                <el-button  :disabled="isDisabled" @click="handelUpload" plain>上传</el-button>
-            </template>
-        </el-form-item>
-    </el-form>
+   <div>
+       <h2>添加电影</h2>
+        <el-form label-width="80px" size="small" >
+            <el-form-item label="中文名称"  name="cName"  style="width:700px">
+                <el-input  v-model="cName" ref="cName"></el-input>
+            </el-form-item>
+            <el-form-item label="英文名称" name="eName" style="width:700px">
+                <el-input v-model="eName"  ref="eName"></el-input>
+            </el-form-item>
+            <el-form-item label="影片类型"  name="type" style="width:700px">
+                <el-input v-model="type"  ref="type"></el-input>
+            </el-form-item>
+            <el-form-item label="制片国家"  name="country" style="width:700px">
+                <el-input v-model="country"  ref="country"></el-input>
+            </el-form-item>
+            <el-form-item label="片长" name="duration" style="width:700px">
+                <el-input v-model="duration"  ref="duration"></el-input>
+            </el-form-item>
+            <el-form-item label="上映时间" name="release" style="width:700px">
+                <el-input v-model="release" ref="release"></el-input>
+            </el-form-item>
+            <el-form-item label="剧情简介" name="synopsis" style="width:700px">
+                <el-input
+                    ref="synopsis"
+                        type="textarea"
+                        :rows="4"
+                        placeholder="请输入内容"
+                        v-model="synopsis">
+                </el-input>
+            </el-form-item>
+            <el-form-item>
+                <template slot-scope="scope">
+                    <el-button type="primary"  @click="create"  plain icon="el-icon-success">保存</el-button>
+                    <el-button type="danger" @click="resetBtn" plain icon="el-icon-error">重置</el-button>
+                    <el-button  :disabled="isDisabled" @click="handelUpload" plain>上传</el-button>
+                </template>
+            </el-form-item>
+        </el-form>
+   </div>
 </template>
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
