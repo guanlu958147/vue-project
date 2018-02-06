@@ -138,6 +138,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
       methods:{
            ...mapMutations("movieStore",["setCurPage","setEachPage"]),
            ...mapActions("movieStore",["deleMoviesAsync","getMoviesByPageAsync","updateMoviesAsync"]),
+           //分页
            handleSizeChange(val) {
                 this.setEachPage({
                     eachPage:val
@@ -148,6 +149,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
                     curPage:val
                 })
             },
+            //删除电影
             dele(index,{_id}){
                 console.log(index)
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {

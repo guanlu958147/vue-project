@@ -8,7 +8,7 @@
           <h1 class="regtitle">注册页面</h1>
         </el-form-item>
     <el-form-item label="用户名" prop="username">
-        <el-input  v-model.number="ruleForm2.username" ref="user" @blur="getuser"></el-input>
+        <el-input  v-model ="ruleForm2.username" ref="user" @blur="getuser"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
         <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
@@ -17,7 +17,8 @@
         <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item class="commit">
-        <el-button type="primary" class="agree" @click="submitForm('ruleForm2')">提交</el-button>
+        <el-button type="primary" class="agree" @click="submitForm('ruleForm2')" v-if="isRepeat" disabled>提交</el-button>
+        <el-button type="primary" class="agree" @click="submitForm('ruleForm2')" v-else>提交</el-button>
         <el-button  class="reset" @click="resetForm('ruleForm2')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -39,7 +40,7 @@
 .reg-conter {
   margin: 0;
   width: 100%;
-  height: 750px;
+  height: 950px;
   background: url("../../images/23a1ec647e2fdbc0935c2fdcf3018860.jpg") no-repeat
     center;
 }
@@ -101,6 +102,7 @@ export default {
       }
     };
     return {
+      isRepeat: false,
       ruleForm2: {
         pass: "",
         checkPass: ""
@@ -127,10 +129,12 @@ export default {
     },
     async getuser() {
       const getarr = await this.checkuser();
-      if (getarr.length >= 1) {
+      if (getarr.length) {
         alert("用户名已存在");
+        this.isRepeat = true;
       } else {
         this.$data.ruleForm2.username = this.$refs.user.value;
+        this.isRepeat = false;
       }
     },
     resetForm(formName) {

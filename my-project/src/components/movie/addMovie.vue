@@ -73,6 +73,7 @@ export default {
       });
       this.isDisabled = false;
     },
+    //重置
     resetBtn() {
       (this.cName = ""),
         (this.eName = ""),
@@ -82,12 +83,10 @@ export default {
         (this.release = ""),
         (this.synopsis = "");
     },
+    //跳转到addImg
     handelUpload() {
       this.$router.push({
-      path:`/info/addImg/${this._id}`,
-         params:{
-
-         }
+      path:`/info/addImg/${this._id}`
       })
     }
   }

@@ -27,7 +27,7 @@
 .login-conter {
   margin: 0;
   width: 100%;
-  height: 750px;
+  height: 950px;
   background: url("../../images/20f9bd8887517cbcacf91b0a7e7dcbb7.jpg") no-repeat
     center;
 }

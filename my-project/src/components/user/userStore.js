@@ -11,11 +11,10 @@ const userStore = {
             Object.assign(state, payload)
         },
         setCurPage(state, { curPage }) {
-            console.log(curPage)
-            state.curPage = curPage
+            return state.curPage = curPage
         },
         setEachPage(state, { eachPage }) {
-            state.eachPage = eachPage
+            return state.eachPage = eachPage
         },
         updateUser(state,{ _id, username, password }){
             state.rows.map((item)=>{

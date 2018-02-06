@@ -144,7 +144,6 @@ const movieStore = {
            },
            //删除图片
            async delImgsByAsync(context,{_id}){
-            // const { movieId,type } = payload
             const data = await fetch(
               "/api/imgs/deleImg?_id="+_id,
               {

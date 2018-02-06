@@ -74,6 +74,9 @@ export default new Router({
         path:'addTheater',
         component:AddTheater
       },{
+        path:'addTheater/:studioId',
+        component:AddTheater
+      },{
         path:'schedule',
         component:Schedule
       }]
