@@ -18,11 +18,12 @@ const movieStore = {
             state._id = _id
         },
         getImgs(state,payload){
-            state.rows = payload.rows.map((item)=>{
-                item.name = item._id
+        const items = payload.rows.map((item)=>{
+                item.imgId = item._id
                 item.url = "http://localhost:3000"+ item.url.slice(1)
                 return item
             })
+            state.rows = [...items]
             state.total = payload.total
         },
         updateMovies(state,{ _id,cName, eName, type, country, duration, release, synopsis }){
@@ -95,7 +96,7 @@ const movieStore = {
            //删除电影
            async deleMoviesAsync(type,payload){
             const { _id,index } = payload
-            const dataDele = await fetch(
+            const data = await fetch(
               "/api/movies/dele?_id="+_id,
               {
                    method:"GET",
@@ -142,11 +143,10 @@ const movieStore = {
                context.commit("getImgs",data)
            },
            //删除图片
-           async delImgsByAsync(context,payload){
-               console.log(payload)
-            const { movieId,type } = payload
+           async delImgsByAsync(context,{_id}){
+            // const { movieId,type } = payload
             const data = await fetch(
-              "/api/imgs/deleImg",
+              "/api/imgs/deleImg?_id="+_id,
               {
                    method:"GET",
                    headers:{

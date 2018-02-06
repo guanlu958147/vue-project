@@ -14,7 +14,6 @@
         :label="item.label"
         :value="item.type">
       </el-option>
-      
     </el-select>
     <el-upload
       class="upload-demo"
@@ -73,10 +72,11 @@ export default {
           type:this.value
         }
       )
-      this.movieImg.movieId = this.$route.params._id
+      this.movieImg.movieId = this.$route.params._id;
+      this.movieImg.type = this.value
         switch(this.value){
           case "1":
-            this.movieImg.type = 1;
+            // this.movieImg.type = 1;
             this.$route.dispatch(
               "movieStore/getImgsByAsync",
               {
@@ -86,7 +86,7 @@ export default {
             )
             break;
           case "0":
-            this.movieImg.type = 0;
+            // this.movieImg.type = 0;
             this.$route.dispatch(
               "movieStore/getImgsByAsync",
               {
@@ -97,32 +97,30 @@ export default {
          }
        },
       handleRemove(file, fileList) {
-        // console.log(fileList);
-        console.log(this.$route.params._id,file._id)
+        console.log(file,fileList);
         this.$store.dispatch(
           "movieStore/delImgsByAsync",
             {
-              movieId:this.$route.params._id,
-              _id:file._id
+              _id:file.imgId
             }
         )
-        if(this.value == 1 ){
-          this.$store.dispatch(
-          "movieStore/getImgsByAsync",
-            {
-              movieId:this.$route.params._id,
-              type:1
-            }
-          )
-        }else{
-           this.$store.dispatch(
-          "movieStore/getImgsByAsync",
-            {
-              movieId:this.$route.params._id,
-              type:0
-            }
-          )
-        }
+        // if(this.value == 1 ){
+        //   this.$store.dispatch(
+        //   "movieStore/getImgsByAsync",
+        //     {
+        //       movieId:this.$route.params._id,
+        //       type:1
+        //     }
+        //   )
+        // }else{
+        //    this.$store.dispatch(
+        //   "movieStore/getImgsByAsync",
+        //     {
+        //       movieId:this.$route.params._id,
+        //       type:0
+        //     }
+        //   )
+        // }
       },
       handlePreview(file) {
         console.log(file);
@@ -133,7 +131,8 @@ export default {
         })
       },
       handleUpload(event, file, fileList){
-        console.log(this.value);
+        // console.log( event,file, fileList);
+        file.type = this.value
       },
       handleCurrentChange(val) {
           this.setCurPage({

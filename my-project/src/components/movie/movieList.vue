@@ -131,7 +131,6 @@ import { mapState,mapMutations,mapActions } from "vuex"
             }
         },
       created(){
-        //   console.log(this.rows)
           this.$store.dispatch({
               type:"movieStore/getMoviesByPageAsync"
           })
@@ -156,6 +155,11 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 cancelButtonText: '取消',
                 type: 'warning'
                 }).then(() => {
+                    this.$store.dispatch({
+                    type:"movieStore/deleMoviesAsync",
+                    _id,
+                    index
+                })
                 this.$message({
                     type: 'success',
                     message: '删除成功!'
@@ -166,15 +170,10 @@ import { mapState,mapMutations,mapActions } from "vuex"
                     message: '已取消删除'
                     });          
                 });
-                this.$store.dispatch({
-                    type:"movieStore/deleMoviesAsync",
-                    _id,
-                    index
-                })
+                
             },
             //更新按钮
             updateBtn(index,row){
-                
                 this.cName = row.cName
                 this.eName= row.eName,
                 this.type= row.type,
