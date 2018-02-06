@@ -15,58 +15,58 @@
                     active-text-color="#ffd04b"
                     >
                     <el-menu-item index="1" route="/info/user">
-                        <i class="el-icon-menu"></i>
+                        <i class="el-icon-service"></i>
                         <span slot="title" >用户管理</span>
                     </el-menu-item>
                     <el-submenu index="2" >
                         <template slot="title">
-                            <i class="el-icon-location"></i>
+                            <i class="el-icon-mobile-phone"></i>
                             <span>电影管理</span>
                         </template>
                         <el-menu-item index="2-1" route="/info/addMovie">
-                            <i class="el-icon-menu"></i>
+                            <i class="el-icon-circle-plus-outline"></i>
                             <span slot="title">新增电影</span>
                         </el-menu-item>
                         <el-menu-item index="2-2" route="/info/movieList">
-                            <i class="el-icon-menu"></i>
+                            <i class="el-icon-document"></i>
                             <span slot="title">电影列表</span>
                         </el-menu-item>
                     </el-submenu>
                     <el-submenu index="3">
                             <template slot="title">
-                                <i class="el-icon-location"></i>
+                                <i class="el-icon-star-off"></i>
                                 <span>影院管理</span>
                             </template>
                             <el-menu-item index="3-1" route="/info/studio">
-                                <i class="el-icon-menu"></i>
+                                <i class="el-icon-circle-plus-outline"></i>
                                 <span slot="title">新增影院</span>
                             </el-menu-item>
                             <el-menu-item index="3-2" route="/info/studioList">
-                                <i class="el-icon-menu"></i>
+                                <i class="el-icon-document"></i>
                                 <span slot="title">影院列表</span>
                             </el-menu-item>
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title">
-                            <i class="el-icon-location"></i>
+                            <i class="el-icon-bell"></i>
                             <span>放映厅管理</span>
                         </template>
                         <el-menu-item index="4-1" route="/info/addTheater">
-                            <i class="el-icon-menu"></i>
+                            <i class="el-icon-circle-plus-outline"></i>
                             <span slot="title">新增放映厅</span>
                         </el-menu-item>
                         <el-menu-item index="4-2" route="/info/theater">
-                            <i class="el-icon-menu"></i>
+                            <i class="el-icon-document"></i>
                             <span slot="title">放映厅列表</span>
                         </el-menu-item>
                     </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">
-                            <i class="el-icon-location"></i>
+                            <i class="el-icon-news"></i>
                             <span>排片管理</span>
                         </template>
                         <el-menu-item index="5-1" route="/info/schedule">
-                            <i class="el-icon-menu"></i>
+                            <i class="el-icon-document"></i>
                             <span slot="title">排片列表</span>
                         </el-menu-item>
                     </el-submenu>
