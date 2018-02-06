@@ -17,7 +17,7 @@ const theaterStore = {
     setEachPage(state,{ eachPage }){//eachPage：newValue=oldValue
         return state.eachPage = eachPage
     },
-    delTheater(state,{index}){//删除
+    delTheater(state,index){//删除
       state.rows.splice(index, 1)
     },
     updated(state,{name,_id,index}){//修改

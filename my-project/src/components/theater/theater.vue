@@ -1,9 +1,10 @@
 <template>
   <div>
+      <h2>放映厅列表</h2>
       <el-table
         :data="rows"
         stripe
-        style="width: 100%">
+        style="width: 50%">
         <el-table-column
         prop="name"
         label="放映厅名称"
@@ -31,17 +32,20 @@
                             <el-input v-model="name" ref="formName"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="primary" @click="submitForm(scope.$index, scope.row)">保存</el-button>
-                            <el-button @click="resetForm">重置</el-button>
+                            <el-button type="primary" @click="submitForm(scope.$index, scope.row)" icon="el-icon-success">保存</el-button>
+                            <el-button @click="resetForm" icon="el-icon-error" type="danger">重置</el-button>
                         </el-form-item>
                     </el-form>
                 </el-popover>
                 <el-button
                 size="mini"
+                type="primary" 
+                icon="el-icon-edit"
                 @click="handleEdit(scope.$index, scope.row)" v-popover:popover4>编辑</el-button>
                 <el-button
                 size="mini"
                 type="danger"
+                icon="el-icon-delete"
                 @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
         </el-table-column>
@@ -53,7 +57,8 @@
       :page-sizes="[10, 20, 30, 40]"
       :page-size="eachPage"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="total">
+      :total="total"
+      style="margin-top:20px">
     </el-pagination>
   </div>
 </template>
@@ -99,7 +104,8 @@ export default {
     ...mapMutations("theaterStore", ["setCurPage", "setEachPage"]),
     submitForm(index, { _id, name }) {
       //保存修改
-      if (name != this.$refs.formName.value) {//判断值有修改时才触发请求
+      if (name != this.$refs.formName.value) {
+        //判断值有修改时才触发请求
         this.$store.dispatch({
           type: "theaterStore/modifyTheater",
           _id: _id,
@@ -117,19 +123,43 @@ export default {
       this.name = name;
     },
     handleDelete(index, { _id }) {
-      //删除
-      this.$store.dispatch({
-        type: "theaterStore/removeTheater",
-        theaterId: _id,
-        index: index
-      });
+      this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          //删除
+          this.$store.dispatch({
+            type: "theaterStore/removeTheater",
+            theaterId: _id,
+            index: index
+          });
+          this.$store.dispatch({
+            type: "theaterStore/getTheatersByPage"
+          });
+          this.$message({
+            type: "success",
+            showClose: true,
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            showClose: true,
+            message: "已取消删除"
+          });
+        });
     },
-    handleSizeChange(val) {//eachPage
+    handleSizeChange(val) {
+      //eachPage
       this.setEachPage({
         eachPage: val
       });
     },
-    handleCurrentChange(val) {//curPage
+    handleCurrentChange(val) {
+      //curPage
       this.setCurPage({
         curPage: val
       });
