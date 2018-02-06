@@ -1,8 +1,8 @@
 
 <template>
     <el-container>
-        <el-header style="background:rgb(67,74,80);color:white;line-height:60px">
-            猫眼电影
+        <el-header style="background:rgb(67,74,80);color:white;line-height:100px;font-size:40px;height:100px">
+            <span>猫</span>眼电影
         </el-header>
         <el-container >
             <el-aside width="200px" mode="horizontal" style="background:#545c64;height:900px" >
