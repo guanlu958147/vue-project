@@ -46,7 +46,6 @@ const studioStore = {
             ).then(function (response) {
                 return response.json();   //需要在“/config/index.js”中配置代理
             });
-            console.log(data)
             context.commit("getStudiosByPage", data)
         },
         async addStudio({ commit }, { name, address }) {      //添加影院
