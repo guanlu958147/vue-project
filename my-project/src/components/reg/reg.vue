@@ -82,13 +82,10 @@
 export default {
   name: "reg",
   data() {
-    var validatePass = (rule, value, callback) => {
+    var validatePass3 = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入密码"));
+        callback(new Error("用户名不能为空"));
       } else {
-        if (this.ruleForm2.checkPass !== "") {
-          this.$refs.ruleForm2.validateField("checkPass");
-        }
         callback();
       }
     };
@@ -103,13 +100,24 @@ export default {
     };
     return {
       isRepeat: false,
+      mess: "",
       ruleForm2: {
         pass: "",
-        checkPass: ""
+        checkPass: "",
+        username: ""
       },
       rules2: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }]
+        username: [
+          {
+            required: true,
+            validator: validatePass3,
+            trigger: "blur"
+          }
+        ],
+        pass: [{ required: true, message: "密码不能为空", trigger: "blur" }],
+        checkPass: [
+          { required: true, validator: validatePass2, trigger: "blur" }
+        ]
       }
     };
   },
@@ -133,7 +141,7 @@ export default {
         alert("用户名已存在");
         this.isRepeat = true;
       } else {
-        this.$data.ruleForm2.username = this.$refs.user.value;
+        // this.$data.ruleForm2.username = this.$refs.user.value;
         this.isRepeat = false;
       }
     },
@@ -165,6 +173,7 @@ export default {
       }).then(function(response) {
         return response.json();
       });
+      return data;
     }
   }
 };

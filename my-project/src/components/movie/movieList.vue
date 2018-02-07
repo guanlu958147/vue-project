@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>电影列表</h2>
         <el-table
             :data="rows"
             stripe

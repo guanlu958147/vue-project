@@ -12,6 +12,8 @@ import StudioList from "../components/studio/studioList.vue"
 import Theater from "../components/theater/theater.vue"
 import AddTheater from "../components/theater/addTheater.vue"
 import Schedule from "../components/schedule/schedule.vue"
+import ScheduleList from "../components/schedule/scheduleList.vue"
+
 
 Vue.component("Login",Login)
 Vue.component("Reg",Reg)
@@ -25,6 +27,7 @@ Vue.component("StudioList",StudioList)
 Vue.component("Theater",Theater)
 Vue.component("AddTheater",AddTheater)
 Vue.component("Schedule",Schedule)
+Vue.component("ScheduleList",ScheduleList)
 
 
 Vue.use(Router);
@@ -38,7 +41,6 @@ export default new Router({
     },
     {
       path: "/login/:username",
-      name: "Login",
       component: Login
     },
     {
@@ -79,6 +81,9 @@ export default new Router({
       },{
         path:'schedule',
         component:Schedule
+      },{
+        path:'scheduleList/:theaterId',
+        component:ScheduleList
       }]
     }
   ]

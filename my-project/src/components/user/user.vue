@@ -154,12 +154,10 @@
                 });
             },
             cancelUpdate(){
-                console.log("cancelUpdate")
                 this.dialogFormVisible = false
             },
             confirmUpdate(){
                 this.dialogFormVisible = false;
-                console.log("confirmUpdate");
                 this.$store.dispatch({
                     type:"userStore/updateUserAsync",
                     _id: this.form._id,
