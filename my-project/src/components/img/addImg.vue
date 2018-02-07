@@ -98,30 +98,30 @@ export default {
          }
        },
       handleRemove(file, fileList) {
-        console.log(file,fileList);
+        console.log(file.imgId);
         this.$store.dispatch(
           "movieStore/delImgsByAsync",
             {
               _id:file.imgId
             }
         )
-        // if(this.value == 1 ){
-        //   this.$store.dispatch(
-        //   "movieStore/getImgsByAsync",
-        //     {
-        //       movieId:this.$route.params._id,
-        //       type:1
-        //     }
-        //   )
-        // }else{
-        //    this.$store.dispatch(
-        //   "movieStore/getImgsByAsync",
-        //     {
-        //       movieId:this.$route.params._id,
-        //       type:0
-        //     }
-        //   )
-        // }
+        if(this.value == 1 ){
+          this.$store.dispatch(
+          "movieStore/getImgsByAsync",
+            {
+              movieId:this.$route.params._id,
+              type:1
+            }
+          )
+        }else{
+           this.$store.dispatch(
+          "movieStore/getImgsByAsync",
+            {
+              movieId:this.$route.params._id,
+              type:0
+            }
+          )
+        }
       },
       handelLoad(){
         console.log(this.value)
