@@ -156,13 +156,9 @@ export default {
           return time.getTime() < Date.now() - 8.64e7;
         }
       },
-     
       visible:false,
       labelPositiom: "right",
       movieId:""
-      
-      
-
     };
   },
   //刷新视图
@@ -177,12 +173,8 @@ export default {
        "total",
        "rows",
        "theatersList"
-     
      ])
   },
-
-
-
   created() {
     //获取电影的方法
     this.$store.dispatch({
@@ -195,8 +187,6 @@ export default {
       type:"scheduleStore/getStudiosByPage"
     })
   },
-
-
 
   //获取后面异步方法
   methods: {

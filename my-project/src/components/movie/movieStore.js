@@ -18,7 +18,8 @@ const movieStore = {
             state._id = _id
         },
         getImgs(state,payload){
-        const items = payload.rows.map((item)=>{
+            console.log(payload.rows)
+            const items = payload.rows.map((item)=>{
                 item.imgId = item._id
                 item.url = "http://localhost:3000"+ item.url.slice(1)
                 return item
@@ -141,6 +142,7 @@ const movieStore = {
                    return response.json();
                })
                context.commit("getImgs",data)
+               console.log(data)
            },
            //删除图片
            async delImgsByAsync(context,{_id}){
