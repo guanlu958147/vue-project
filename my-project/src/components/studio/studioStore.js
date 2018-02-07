@@ -69,7 +69,7 @@ const studioStore = {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
-                    body: `studioId=${studioId}`,
+                    body: `_id=${studioId}`,
                     credentials: "include"
                 }
             ).then(function (response) {
