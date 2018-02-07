@@ -20,6 +20,12 @@
             <el-form-item label="上映时间" name="release" style="width:700px">
                 <el-input v-model="release" ref="release"></el-input>
             </el-form-item>
+            <el-form-item label="评分" name="average" style="width:700px">
+                <el-input v-model="average" ref="average"></el-input>
+            </el-form-item>
+            <el-form-item label="星星" name="stars" style="width:700px">
+                <el-input v-model="stars" ref="stars"></el-input>
+            </el-form-item>
             <el-form-item label="剧情简介" name="synopsis" style="width:700px">
                 <el-input
                     ref="synopsis"
@@ -54,6 +60,8 @@ export default {
       country: "美国",
       duration: "120分钟",
       release: "2017-11-17大陆上映",
+      average:8.5,
+      stars:5,
       synopsis:
         "本片讲述的是受到超人（亨利·卡维尔 饰）无私奉献的影响，蝙蝠侠（本·阿弗莱克 饰）重燃了对人类的信心，接受了新盟友神奇女侠（盖尔·加朵 饰）的帮助，去对抗更加强大的敌人。蝙蝠侠和神奇女侠一同寻找并招募了一支超人类联盟来抵挡新觉醒的威胁。但尽管这支队伍集结了超人、蝙蝠侠、神奇女侠、闪电侠（埃兹拉·米勒 饰）、海王（杰森·莫玛 饰）和钢骨（雷·费舍 饰）等人，他们似乎无法阻止敌人对地球的进攻……"
     };
@@ -72,7 +80,9 @@ export default {
         country: this.$refs.country.value,
         duration: this.$refs.duration.value,
         release: this.$refs.release.value,
-        synopsis: this.$refs.synopsis.value
+        synopsis: this.$refs.synopsis.value,
+        average:this.$refs.average.value,
+        stars:this.$refs.stars.value
       });
       this.isDisabled = false;
     },
@@ -85,6 +95,8 @@ export default {
         (this.duration = ""),
         (this.release = ""),
         (this.synopsis = "");
+        (this.average = "");
+        (this.stars = "");
     },
     //跳转到addImg
     handelUpload() {

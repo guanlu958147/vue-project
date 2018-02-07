@@ -22,6 +22,7 @@
       :on-preview="handlePreview"
       :on-remove="handleRemove"
       :on-progress="handleUpload"
+      :on-success="handelLoad"
       :file-list="rows"
       list-type="picture">
       <el-button size="small" type="primary">上传</el-button>
@@ -77,7 +78,7 @@ export default {
         switch(this.value){
           case "1":
             // this.movieImg.type = 1;
-            this.$route.dispatch(
+            this.$store.dispatch(
               "movieStore/getImgsByAsync",
               {
                 movieId:this.$route.params._id,
@@ -87,7 +88,7 @@ export default {
             break;
           case "0":
             // this.movieImg.type = 0;
-            this.$route.dispatch(
+            this.$store.dispatch(
               "movieStore/getImgsByAsync",
               {
                 movieId:this.$route.params._id,
@@ -97,30 +98,40 @@ export default {
          }
        },
       handleRemove(file, fileList) {
-        console.log(file,fileList);
+        console.log(file.imgId);
         this.$store.dispatch(
           "movieStore/delImgsByAsync",
             {
               _id:file.imgId
             }
         )
-        // if(this.value == 1 ){
-        //   this.$store.dispatch(
-        //   "movieStore/getImgsByAsync",
-        //     {
-        //       movieId:this.$route.params._id,
-        //       type:1
-        //     }
-        //   )
-        // }else{
-        //    this.$store.dispatch(
-        //   "movieStore/getImgsByAsync",
-        //     {
-        //       movieId:this.$route.params._id,
-        //       type:0
-        //     }
-        //   )
-        // }
+        if(this.value == 1 ){
+          this.$store.dispatch(
+          "movieStore/getImgsByAsync",
+            {
+              movieId:this.$route.params._id,
+              type:1
+            }
+          )
+        }else{
+           this.$store.dispatch(
+          "movieStore/getImgsByAsync",
+            {
+              movieId:this.$route.params._id,
+              type:0
+            }
+          )
+        }
+      },
+      handelLoad(){
+        console.log(this.value)
+         this.$store.dispatch(
+              "movieStore/getImgsByAsync",
+              {
+                movieId:this.$route.params._id,
+                type:this.value
+              }
+            )
       },
       handlePreview(file) {
         console.log(file);
