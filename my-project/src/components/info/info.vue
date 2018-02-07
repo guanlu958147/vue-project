@@ -67,8 +67,9 @@
                         </template>
                         <el-menu-item index="5-1" route="/info/schedule">
                             <i class="el-icon-document"></i>
-                            <span slot="title">排片列表</span>
+                            <span slot="title">增加排片</span>
                         </el-menu-item>
+                        
                     </el-submenu>
                 </el-menu>
             </el-aside>

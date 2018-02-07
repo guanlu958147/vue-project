@@ -60,8 +60,8 @@
                  <div class="block">
                     <label>时间:</label>
                     <el-date-picker v-model="dataValue"
-                     :picker-options="pickerOptions0"
                      type="datetime"
+                   
                       placeholder="选择日期时间"></el-date-picker>
                  </div>
 
@@ -137,8 +137,8 @@
                          <el-button 
                          size="mini"
                         type="danger"
-                        @click="scheduleClick(scope.$index, scope.row)"
-                         >查看排片</el-button>
+                        @click="scheduleClick(scope.row)"
+                         >查看时间</el-button>
                       </template>
                   </el-table-column>
             </el-table>
@@ -147,6 +147,7 @@
 </template> 
 <script>
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+import moment from "moment";
 export default {
   //初始化数据
   data() {
@@ -156,15 +157,12 @@ export default {
       theaterValue: "",
       dataValue: "",
       priceValue: "",
-      pickerOptions0: {
-        disabledDate(time) {
-          return time.getTime() < Date.now() - 8.64e7;
-        }
-      },
-     
-      visible:false,
-      labelPositiom: "right",
-      movieId:""
+      movieId:"",
+      // pickerOptions0: {
+      //   disabledDate(time) {
+      //     return time.getTime() < Date.now() - 8.64e7;
+      //   }
+      // }
       
       
 
@@ -214,7 +212,6 @@ export default {
       "getStudiosByMovieId"//查询按钮，排片的所有信息
   
       ]),
-
      //获取movieID
      editMoviesState(value){
           this.movieId = value 
@@ -230,7 +227,7 @@ export default {
       })
     },
 
-
+//  
     //确认排片按钮
     clickConfirmBtn(){
          this.$store.dispatch({
@@ -238,7 +235,7 @@ export default {
             movieId : this.movieValue,
             studioId : this.studioValue,
             theateriD : this.theaterValue,
-            showId : this.dataValue,
+            showId :moment(new Date(this.dataValue)).format("YYYY-MM-DD HH:mm"),
             price : this.priceValue
        })
        this.$message({
@@ -275,9 +272,12 @@ export default {
 
 
 
-     //查看排片
-     scheduleClick(){
-       console.log(123123)
+     //查看时间
+     scheduleClick(row){
+      console.log(row)
+        this.$router.push({
+          path:`/info/scheduleList/${row._id}`
+        })
      }
   }
 };

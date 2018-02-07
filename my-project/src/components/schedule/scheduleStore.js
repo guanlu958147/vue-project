@@ -22,6 +22,9 @@ const scheduleStore = {
     },
     studiosList: {
       data: []
+    },
+    scheduleTimeList:{
+       data:[]
     }
 
 
@@ -43,9 +46,13 @@ const scheduleStore = {
     },
     //影厅列表
     studioList(state, payload) {
-      return Object.assign(state, studiosList, payload)
+      return Object.assign(state.studiosList, payload)
+    },
+    //获取排片时间
+    scheduleTime(state,payload){
+      return Object.assign(state.scheduleTimeList, payload)
     }
-
+    
   },
   actions: {
 
@@ -182,11 +189,27 @@ const scheduleStore = {
         return response.json()
 
       });
-
-      console.log(data)
       commit("getTheaters", {
         data
       })
+    },
+
+
+
+    //*****************************************************  查看排片时间  *********************************************/
+    async showTime({commit }, { theaterId } ){
+      const data = await fetch (
+        "/api/schedules/showTime?theaterId=" + theaterId, {
+           method: "GET",
+           headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+           }
+        }
+      ).then(function(response){
+        return response.json()
+      })
+      console.log(data)
+      commit("scheduleTime",{data})
     }
   }
 }
