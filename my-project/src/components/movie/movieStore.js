@@ -27,7 +27,7 @@ const movieStore = {
             state.rows = [...items]
             state.total = payload.total
         },
-        updateMovies(state,{ _id,cName, eName, type, country, duration, release, synopsis }){
+        updateMovies(state,{ _id,cName, eName, type, country, duration, release, synopsis,stars,average }){
             state.rows.map((item)=>{
                 if( _id == item._id ){
                     item.cName = cName,
@@ -36,7 +36,9 @@ const movieStore = {
                     item.country = country,
                     item.duration = duration,
                     item.release = release,
-                    item.synopsis = synopsis
+                    item.synopsis = synopsis,
+                    item.stars = stars,
+                    item.average = average
                 }
             })
         },
@@ -50,13 +52,15 @@ const movieStore = {
     actions: {
         //保存电影
         async createMoviesAsync(meType, {
-              cName,
+            cName,
             eName,
             type,
             country,
             duration,
             release,
-            synopsis
+            synopsis,
+            stars,
+            average
         }) {
             const data = await fetch(
                 "/api/movies/create",
@@ -65,7 +69,7 @@ const movieStore = {
                     headers:{
                         "Content-Type":"application/x-www-form-urlencoded"
                     },
-                    body:`cName=${cName}&eName=${eName}&type=${type}&country=${country}&duration=${duration}&release=${release}&synopsis=${synopsis}`
+                    body:`cName=${cName}&eName=${eName}&type=${type}&country=${country}&duration=${duration}&release=${release}&synopsis=${synopsis}&average=${average}&stars=${stars}`
                 }).then(function(response){
                     return response.json();
                 })
@@ -110,7 +114,7 @@ const movieStore = {
                type.commit("deleMovies",index)
            },
            //修改
-           async updateMoviesAsync(movType,{_id,cName,eName,type,country,duration,release,synopsis}){
+           async updateMoviesAsync(movType,{_id,cName,eName,type,country,duration,release,synopsis,stars,average}){
             const updateData = await fetch(
               "/api/movies/update",
               {
@@ -118,13 +122,13 @@ const movieStore = {
                    headers:{
                        "Content-Type":"application/x-www-form-urlencoded"
                    },
-                   body:`_id=${_id}&cName=${cName}&eName=${eName}&type=${type}&country=${country}&duration=${duration}&release=${release}&synopsis=${synopsis}`
+                   body:`_id=${_id}&cName=${cName}&eName=${eName}&type=${type}&country=${country}&duration=${duration}&release=${release}&synopsis=${synopsis}&average=${average}&stars=${stars}`
 
                }).then(function(response){
                    return response.json();
                })
                if(updateData.nModified==1){
-                movType.commit("updateMovies",{_id,cName,eName,type,country,duration,release,synopsis})
+                movType.commit("updateMovies",{_id,cName,eName,type,country,duration,release,synopsis,stars,average})
                }
            },
            //通过movieId查找图片
@@ -138,6 +142,7 @@ const movieStore = {
                    headers:{
                        "Content-Type":"application/x-www-form-urlencoded"
                    }
+
                }).then(function(response){
                    return response.json();
                })
