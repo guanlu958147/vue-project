@@ -8,40 +8,47 @@
             <el-table-column
             prop="cName"
             label="中文名称"
-            width="120">
+            width="110">
             </el-table-column>
             <el-table-column
             prop="eName"
             label="英文名称"
-            width="120">
+            width="110">
             </el-table-column>
             <el-table-column
             prop="type"
-            width="120"
+            width="110"
             label="影片类型">
             </el-table-column>
             <el-table-column
             prop="country"
             label="制片国家"
-            width="120"
+            width="110"
             >
             </el-table-column>
             <el-table-column
             prop="duration"
             label="片长"
-            width="120"
+            width="110"
             >
             </el-table-column>
             <el-table-column
             prop="release"
             label="上映时间"
-            width="100"
+            width="110"
             >
-            </el-table-column>
+             </el-table-column>
+            <el-table-column
+            prop="average"
+            label="评分"
+            width="110"
+            >
+             </el-table-column>
+            
             <el-table-column
             prop="synopsis"
             label="剧情简介"
-            width="120"
+            width="110"
             height="200"
             style="overflow:hidden;height:200px"
             >
@@ -49,6 +56,7 @@
         <el-table-column
             fixed="right"
             label="操作"
+            size="mini"
             >
             <template slot-scope="scope">
             <el-popover
@@ -75,7 +83,11 @@
                     <el-form-item label="上映时间">
                         <el-input v-model="release" ref="release"></el-input>
                     </el-form-item>
-                    <el-form-item label="剧情简介">
+                    <el-form-item label="评分">
+                        <el-input v-model="average" ref="average"></el-input>
+                    </el-form-item>
+                    
+                     <el-form-item label="剧情简介">
                         <el-input v-model="synopsis" ref="synopsis"></el-input>
                     </el-form-item>
                     <el-form-item>
@@ -113,7 +125,8 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 country: "",
                 duration: "",
                 release: "",
-                synopsis:""
+                synopsis:"",
+                average:""
             };
     },
         computed:{
@@ -152,7 +165,6 @@ import { mapState,mapMutations,mapActions } from "vuex"
             },
             //删除电影
             dele(index,{_id}){
-                console.log(index)
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -183,10 +195,11 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 this.country= row.country,
                 this.duration= row.duration,
                 this.release= row.release,
-                this.synopsis = row.synopsis
+                this.synopsis = row.synopsis,
+                this.average = row.average
             },
             //更新里的保存按钮
-            creUpdata(index,{_id,cName,eName,type,duration,release,synopsis}){
+            creUpdata(index,{_id,cName,eName,type,duration,release,average,synopsis}){
                 // console.log(row)
                 this.$store.dispatch(
                "movieStore/updateMoviesAsync",
@@ -198,7 +211,8 @@ import { mapState,mapMutations,mapActions } from "vuex"
                     duration:this.$refs.duration.value,
                     release:this.$refs.release.value,
                     synopsis:this.$refs.synopsis.value,
-                    country:this.$refs.country.value
+                    country:this.$refs.country.value,
+                    average:this.$refs.average.value
                 }
             )
         },
@@ -210,7 +224,8 @@ import { mapState,mapMutations,mapActions } from "vuex"
             this.country=""
             this.duration="",
             this.release="",
-            this.synopsis=""
+            this.synopsis="",
+            this.average=""
         }
       }
     }

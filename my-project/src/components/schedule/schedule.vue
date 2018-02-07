@@ -184,9 +184,6 @@ export default {
      
      ])
   },
-
-
-
   created() {
     //获取电影的方法
     this.$store.dispatch({
@@ -199,8 +196,6 @@ export default {
       type:"scheduleStore/getStudiosByPage"
     })
   },
-
-
 
   //获取后面异步方法
   methods: {
