@@ -1,8 +1,11 @@
 
 <template>
     <el-container>
-        <el-header style="background:rgb(67,74,80);color:white;line-height:100px;font-size:40px;height:100px">
-            猫眼电影
+        <el-header style="background:rgb(67,74,80);color:white;line-height:100px;font-size:36px;height:100px;letter-spacing:5px;font-weight:1000">
+            <div>
+                <img src="../../images/avatar.png" class="logo" style="width:50px;height:50px;position:relative;top:12px">
+                <span style="color:red">猫眼</span>电影
+            </div>
         </el-header>
         <el-container >
             <el-aside width="200px" mode="horizontal" style="background:#545c64;height:900px" >
@@ -113,5 +116,10 @@ export default {
     }
     .el-submenu__title{
         border-bottom: rgba(0, 0, 0, 0.2) solid;
+    }
+    .logo{
+        width:"40px";
+        height:"40px";
+        
     }
 </style>

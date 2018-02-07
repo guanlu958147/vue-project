@@ -95,18 +95,19 @@ const movieStore = {
            },
            //删除电影
            async deleMoviesAsync(type,payload){
+               console.log(payload)
             const { _id,index } = payload
-            const data = await fetch(
-              "/api/movies/dele?_id="+_id,
-              {
-                   method:"GET",
-                   headers:{
-                       "Content-Type":"application/x-www-form-urlencoded"
-                   }
-               }).then(function(response){
-                   return response.json();
-               })
-               type.commit("deleMovies",index)
+            // const data = await fetch(
+            //   "/api/movies/dele?_id="+_id,
+            //   {
+            //        method:"GET",
+            //        headers:{
+            //            "Content-Type":"application/x-www-form-urlencoded"
+            //        }
+            //    }).then(function(response){
+            //        return response.json();
+            //    })
+            //    type.commit("deleMovies",index)
            },
            //修改
            async updateMoviesAsync(movType,{_id,cName,eName,type,country,duration,release,synopsis}){
