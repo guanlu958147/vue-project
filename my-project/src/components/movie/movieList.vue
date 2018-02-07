@@ -8,52 +8,47 @@
             <el-table-column
             prop="cName"
             label="中文名称"
-            width="100">
+            width="110">
             </el-table-column>
             <el-table-column
             prop="eName"
             label="英文名称"
-            width="100">
+            width="110">
             </el-table-column>
             <el-table-column
             prop="type"
-            width="100"
+            width="110"
             label="影片类型">
             </el-table-column>
             <el-table-column
             prop="country"
             label="制片国家"
-            width="100"
+            width="110"
             >
             </el-table-column>
             <el-table-column
             prop="duration"
             label="片长"
-            width="100"
+            width="110"
             >
             </el-table-column>
             <el-table-column
             prop="release"
             label="上映时间"
-            width="100"
+            width="110"
             >
              </el-table-column>
             <el-table-column
             prop="average"
             label="评分"
-            width="100"
+            width="110"
             >
              </el-table-column>
-            <el-table-column
-            prop="stars"
-            label="星星"
-            width="100"
-            >
-            </el-table-column>
+            
             <el-table-column
             prop="synopsis"
             label="剧情简介"
-            width="100"
+            width="110"
             height="200"
             style="overflow:hidden;height:200px"
             >
@@ -91,9 +86,7 @@
                     <el-form-item label="评分">
                         <el-input v-model="average" ref="average"></el-input>
                     </el-form-item>
-                    <el-form-item label="星星">
-                        <el-input v-model="stars" ref="stars"></el-input>
-                    </el-form-item>
+                    
                      <el-form-item label="剧情简介">
                         <el-input v-model="synopsis" ref="synopsis"></el-input>
                     </el-form-item>
@@ -133,8 +126,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 duration: "",
                 release: "",
                 synopsis:"",
-                average:"",
-                stars:""
+                average:""
             };
     },
         computed:{
@@ -204,11 +196,10 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 this.duration= row.duration,
                 this.release= row.release,
                 this.synopsis = row.synopsis,
-                this.average = row.average,
-                this.stars = row.stars
+                this.average = row.average
             },
             //更新里的保存按钮
-            creUpdata(index,{_id,cName,eName,type,duration,release,stars,average,synopsis}){
+            creUpdata(index,{_id,cName,eName,type,duration,release,average,synopsis}){
                 // console.log(row)
                 this.$store.dispatch(
                "movieStore/updateMoviesAsync",
@@ -221,8 +212,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
                     release:this.$refs.release.value,
                     synopsis:this.$refs.synopsis.value,
                     country:this.$refs.country.value,
-                    average:this.$refs.average.value,
-                    stars:this.$refs.stars.value
+                    average:this.$refs.average.value
                 }
             )
         },
@@ -235,8 +225,7 @@ import { mapState,mapMutations,mapActions } from "vuex"
             this.duration="",
             this.release="",
             this.synopsis="",
-            this.average="",
-            this.stars=""
+            this.average=""
         }
       }
     }
