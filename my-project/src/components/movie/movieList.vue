@@ -8,43 +8,54 @@
             <el-table-column
             prop="cName"
             label="中文名称"
-            width="110">
+            width="100">
             </el-table-column>
             <el-table-column
             prop="eName"
             label="英文名称"
-            width="110">
+            width="100">
             </el-table-column>
             <el-table-column
             prop="type"
-            width="110"
+            width="100"
             label="影片类型">
             </el-table-column>
             <el-table-column
             prop="country"
             label="制片国家"
-            width="110"
+            width="100"
             >
             </el-table-column>
             <el-table-column
             prop="duration"
             label="片长"
-            width="110"
+            width="90"
             >
             </el-table-column>
             <el-table-column
             prop="release"
             label="上映时间"
-            width="110"
+            width="90"
             >
              </el-table-column>
             <el-table-column
             prop="average"
             label="评分"
-            width="110"
+            width="60"
             >
              </el-table-column>
-            
+            <el-table-column
+            prop="state"
+            label="电影状态"
+            width="90"
+            >
+             </el-table-column>
+             <el-table-column
+            prop="stars"
+            label="星星"
+            width="60"
+            >
+             </el-table-column>
             <el-table-column
             prop="synopsis"
             label="剧情简介"
@@ -86,7 +97,12 @@
                     <el-form-item label="评分">
                         <el-input v-model="average" ref="average"></el-input>
                     </el-form-item>
-                    
+                    <el-form-item label="星星">
+                        <el-input v-model="stars" ref="stars"></el-input>
+                    </el-form-item>
+                    <el-form-item label="电影状态">
+                        <el-input v-model="state" ref="state"></el-input>
+                    </el-form-item>
                      <el-form-item label="剧情简介">
                         <el-input v-model="synopsis" ref="synopsis"></el-input>
                     </el-form-item>
@@ -126,7 +142,9 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 duration: "",
                 release: "",
                 synopsis:"",
-                average:""
+                average:"",
+                state:"",
+                stars:""
             };
     },
         computed:{
@@ -196,11 +214,12 @@ import { mapState,mapMutations,mapActions } from "vuex"
                 this.duration= row.duration,
                 this.release= row.release,
                 this.synopsis = row.synopsis,
-                this.average = row.average
+                this.average = row.average,
+                this.state = row.state,
+                this.stars = row.stars
             },
             //更新里的保存按钮
-            creUpdata(index,{_id,cName,eName,type,duration,release,average,synopsis}){
-                // console.log(row)
+            creUpdata(index,{_id,cName,eName,type,duration,release,average,synopsis,state,stars}){
                 this.$store.dispatch(
                "movieStore/updateMoviesAsync",
                 {
@@ -212,7 +231,9 @@ import { mapState,mapMutations,mapActions } from "vuex"
                     release:this.$refs.release.value,
                     synopsis:this.$refs.synopsis.value,
                     country:this.$refs.country.value,
-                    average:this.$refs.average.value
+                    average:this.$refs.average.value,
+                    state:this.$refs.state.value,
+                    stars:this.$refs.stars.value
                 }
             )
         },
@@ -225,7 +246,9 @@ import { mapState,mapMutations,mapActions } from "vuex"
             this.duration="",
             this.release="",
             this.synopsis="",
-            this.average=""
+            this.average="",
+            this.state="",
+            this.stars=""
         }
       }
     }
